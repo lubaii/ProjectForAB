@@ -15,7 +15,7 @@
 
 <h3>Скачать файл только с расширением txt</h3>
 
-<form action="UploadServer" method="post" enctype="multipart/form-data">
+<form action="uploadServer" method="post" enctype="multipart/form-data">
     <p>
         <input type="file" name="file">
         <input type="submit" value="Скачать"></p>

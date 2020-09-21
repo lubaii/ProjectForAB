@@ -6,6 +6,9 @@
     <title>Result page</title>
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/login">
+    Регистрация
+</a>
 <div>
 
     <h3 style="color:red;"> Чтобы скачать файлы с другим расширением, необходимо зарегистрироваться</h3>
