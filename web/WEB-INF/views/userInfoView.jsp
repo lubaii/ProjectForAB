@@ -13,7 +13,7 @@
 
 <h3>Это страница: ${loginedUser.userName}</h3>
 
-Имя: <b>${loginedUser.userName}</b>
+ <b>Вы можете скачать файлы с другими расширениями</b>
 <br />
 <form action="uploadServerAll" method="post" enctype="multipart/form-data">
     <p>
