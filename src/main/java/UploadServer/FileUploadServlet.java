@@ -1,4 +1,4 @@
-package uploadServer;
+package UploadServer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
-@WebServlet("/uploadServer")
+@WebServlet("/UploadServer")
 @MultipartConfig
 public class FileUploadServlet extends HttpServlet {
     private final String UPLOAD_DIRECTORY = "C:\\Users\\User\\Desktop\\1";
@@ -24,7 +24,7 @@ public class FileUploadServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file");
 
         String fileName = filePart.getSubmittedFileName();

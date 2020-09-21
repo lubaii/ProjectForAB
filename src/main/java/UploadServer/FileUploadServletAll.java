@@ -1,4 +1,4 @@
-package uploadServer;
+package UploadServer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
