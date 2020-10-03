@@ -1,6 +1,7 @@
 package filter;
 
 import bean.UserAccount;
+import download.DownloadServlet;
 import request.UserRoleRequestWrapper;
 import units.AppUtils;
 import units.SecurityUtils;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
+    UserAccount loginedUser = null;
 
     public SecurityFilter() {
     }
@@ -33,9 +35,19 @@ public class SecurityFilter implements Filter {
 
         String servletPath = request.getServletPath();
 
+        if (servletPath.equals("/DownloadServlet")) {
+            new DownloadServlet();
+            chain.doFilter(request, response);
+            return;
+        }
+        else if (servletPath.equals("/DownloadServlet2")&&loginedUser==null){
+            response.sendRedirect(request.getContextPath() + "/login");
+            chain.doFilter(request, response);
+            return;}
+
         // Информация пользователя сохранена в Session
         // (После успешного входа в систему).
-        UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
+         loginedUser = AppUtils.getLoginedUser(request.getSession());
 
         if (servletPath.equals("/login")) {
             chain.doFilter(request, response);

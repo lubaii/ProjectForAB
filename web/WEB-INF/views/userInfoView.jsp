@@ -14,12 +14,9 @@
 <h3>Это страница: ${loginedUser.userName}</h3>
 
  <b>Вы можете скачать файлы с другими расширениями</b>
-<br />
-<form action="uploadServerAll" method="post" enctype="multipart/form-data">
-    <p>
-        <input type="file" name="file">
-        <input type="submit" value="Скачать"></p>
-</form>
+<br/>
+Скачать фотографию: <a href="DownloadServlet2">test.jpg</a>
+Скачать файл: <a href="DownloadServlet">test.txt</a>
 
 </body>
 </html>

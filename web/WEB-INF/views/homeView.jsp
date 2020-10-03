@@ -15,10 +15,12 @@
 
 <h3>Скачать файл только с расширением txt</h3>
 
-<form action="uploadServer" method="post" enctype="multipart/form-data">
+Скачать файл: <a href="DownloadServlet">test.txt</a>
+Скачать фотографию: <a href="DownloadServlet2">test2.jpg</a>
+<%--<form action="uploadServer" method="post" enctype="multipart/form-data">
     <p>
         <input type="file" name="file">
         <input type="submit" value="Скачать"></p>
-</form>
+</form>--%>
 </body>
 </html>
