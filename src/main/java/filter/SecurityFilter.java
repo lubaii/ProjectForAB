@@ -21,11 +21,8 @@ public class SecurityFilter implements Filter {
     public SecurityFilter() {
     }
 
-    //@Override
     public void destroy() {
     }
-
-   // @Override
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
@@ -97,7 +94,6 @@ public class SecurityFilter implements Filter {
         chain.doFilter(wrapRequest, response);
     }
 
-    //@Override
     public void init(FilterConfig fConfig) throws ServletException {
 
     }

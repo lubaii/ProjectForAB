@@ -1,9 +1,5 @@
 package download;
 
-import filter.SecurityFilter;
-import org.apache.commons.io.IOUtils;
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +16,6 @@ public class DownloadServlet extends HttpServlet {
     private final String DOWNLOAD_JPG_="C:\\Users\\User\\Desktop\\test2.jpg";
 
     private String filePath;
-    public DownloadServlet(String filePath) {
-
-        this.filePath = filePath;
-    }
 
     public DownloadServlet() {
     }
@@ -44,12 +36,10 @@ public class DownloadServlet extends HttpServlet {
         FileInputStream inStream = new FileInputStream(downloadFile);
         response.setContentLength((int) downloadFile.length());
 
-        // forces download
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
         response.setHeader(headerKey, headerValue);
 
-        // obtains response's output stream
         OutputStream outStream = response.getOutputStream();
 
         byte[] buffer = new byte[4096];

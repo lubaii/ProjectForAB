@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         request.getSession().invalidate();
 
-        // Redrect to Home Page.
+        // Перенаправление to Home Page.
         response.sendRedirect(request.getContextPath() + "/");
 
     }

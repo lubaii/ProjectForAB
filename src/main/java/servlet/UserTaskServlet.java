@@ -20,8 +20,8 @@ public class UserTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher //
-                = this.getServletContext()//
+        RequestDispatcher dispatcher
+                = this.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/userTaskView.jsp");
 
         dispatcher.forward(request, response);

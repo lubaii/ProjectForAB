@@ -7,8 +7,6 @@ public class SecurityConfig {
     public static final String ROLE_ADMIN = "ADMIN";
     public static final String ROLE_USER = "USER";
 
-    // String: Role
-    // List<String>: urlPatterns.
     private static final Map<String, List<String>> mapConfig = new HashMap<String, List<String>>();
 
     static {
