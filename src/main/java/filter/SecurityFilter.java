@@ -31,16 +31,16 @@ public class SecurityFilter implements Filter {
 
 
         String servletPath = request.getServletPath();
-
         if (servletPath.equals("/DownloadServlet")) {
             new DownloadServlet();
             chain.doFilter(request, response);
             return;
         }
-        else if (servletPath.equals("/DownloadServlet2")&&loginedUser==null){
+        /*else if (servletPath.equals("/DownloadServlet2")&&loginedUser==null){
+      //  else if (getjpg.equals("jpg")&&loginedUser==null){
             response.sendRedirect(request.getContextPath() + "/login");
             chain.doFilter(request, response);
-            return;}
+            return;}*/
 
         // Информация пользователя сохранена в Session
         // (После успешного входа в систему).
