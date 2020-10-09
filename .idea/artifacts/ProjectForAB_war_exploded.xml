@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="ProjectForAB" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.14" />
+        </element>
       </element>
     </root>
   </artifact>

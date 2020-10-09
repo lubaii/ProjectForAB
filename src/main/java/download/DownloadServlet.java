@@ -8,44 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
-//@WebServlet({"/DownloadServlet","/DownloadServlet2"})
-//@WebServlet(name ="/DownloadServlet",urlPatterns = { "*.jpg", "*.txt" })
-//@WebServlet(name ="/DownloadServlet",urlPatterns = { "/test", "/test2" })
 @WebServlet("/DownloadServlet")
 public class DownloadServlet extends HttpServlet {
     UserAccount loginedUser = null;
-    //private final String DOWNLOAD_TXT_="C:\\Users\\User\\Desktop\\test.txt";;
-    //  private final String DOWNLOAD_JPG_="C:\\Users\\User\\Desktop\\test2.jpg";
-
     private final String DOWNLOAD_TXT_ = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\test.txt";
     private final String DOWNLOAD_JPG_ = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\test2.jpg";
 
     private String filePath;
 
     public DownloadServlet() {
-    }
 
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-
-        // Получить значение параметра инициализирования (initialization parameter) Servlet.
-        // (По конфигурации данный Servlet в web.xml).
-        this.filePath = config.getInitParameter("test");
     }
 
     private static final long serialVersionUID = 1L;
 
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loginedUser = AppUtils.getLoginedUser(request.getSession());
         String servletPath = request.getServletPath();
-        ServletOutputStream out = response.getOutputStream();
         String gettxt = request.getParameter("txt");
         String getjpg = request.getParameter("jpg");
 
@@ -55,19 +37,19 @@ public class DownloadServlet extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/login");
                     return;
                 } else filePath = DOWNLOAD_JPG_;
-            }
-            else   if (gettxt != null && getjpg == null) {
+            } else if (gettxt != null && getjpg == null) {
                 if (gettxt.equals("txt")) {
                     filePath = DOWNLOAD_TXT_;
-                }else response.sendRedirect(request.getContextPath() + "/login");
+                } else response.sendRedirect(request.getContextPath() + "/login");
             }
-            //else  if (servletPath.equals("/DownloadServlet")&&loginedUser==null){
-            ;
-        } if (gettxt != null && getjpg != null){
-            out.write("Выберете файл txt для скачивания".getBytes("UTF-8"));}
-        else
-            out.write("Выберете файл для скачивания".getBytes("UTF-8"));
-        //selvletContext.setAttribute("warning","Выберете значения");
+        } else {
+            response.setContentType("text/html; charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            out.write("<p> Выберете файл для скачивания</p>");
+            out.close();
+        }
+
 
 
         File downloadFile = new File(filePath);
