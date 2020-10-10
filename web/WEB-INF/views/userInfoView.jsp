@@ -14,7 +14,13 @@
 <h3>Это страница: ${loginedUser.userName}</h3>
 
  <b>Вы можете скачать файлы с другими расширениями</b>
-<form name="submitForm" method="POST" action="DownloadServlet">
+
+<br/>
+Скачать фотографию: <a href="DownloadServlet?param=jpg">test.jpg</a>
+</p>
+Скачать файл: <a href="DownloadServlet?param=txt">test.txt</a>
+
+<%--<form name="submitForm" method="POST" action="DownloadServlet">
     <input type="checkbox" name="txt" value="txt">test.txt<br>
     <p/>
     <input type="checkbox" name="jpg" value="jpg">test.jpg<br>
@@ -37,7 +43,7 @@
         }
     }
 
-</script>
+</script>--%>
 
 </body>
 </html>

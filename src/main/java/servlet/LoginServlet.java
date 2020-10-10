@@ -1,8 +1,10 @@
 package servlet;
 
 import bean.UserAccount;
+import org.apache.commons.codec.digest.DigestUtils;
 import units.AppUtils;
 import units.DataDAO;
+import units.PasswordHash;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         super();
     }
+   // PasswordHash passwordHash;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +40,11 @@ public class LoginServlet extends HttpServlet {
 
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        UserAccount userAccount = DataDAO.findUser(userName, password);
+
+        //String hashPassword =passwordHash.password(password);
+        String hashPassword = password(password);
+        UserAccount userAccount = DataDAO.findUser(userName, hashPassword);
+       // UserAccount userAccount = DataDAO.findUser(userName, password);
 
         if (userAccount == null) {
             String errorMessage = "Неправильный логин или пароль";
@@ -68,6 +75,10 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/userInfo");
         }
 
+    }
+    public  String password(String tempPass) {
+        String md5Hex = DigestUtils.md5Hex(tempPass);
+        return md5Hex;
     }
 
 }

@@ -18,6 +18,7 @@ public class DownloadServlet extends HttpServlet {
 
     private String filePath;
 
+
     public DownloadServlet() {
 
     }
@@ -25,12 +26,25 @@ public class DownloadServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         loginedUser = AppUtils.getLoginedUser(request.getSession());
         String servletPath = request.getServletPath();
-        String gettxt = request.getParameter("txt");
-        String getjpg = request.getParameter("jpg");
+        String param = request.getParameter("param");
 
+        if(param.equals("jpg")){
+            if (servletPath.equals("/DownloadServlet") && loginedUser == null) {
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            } else filePath = DOWNLOAD_JPG_;
+        } else if(param.equals("txt")){
+            filePath = DOWNLOAD_TXT_;
+        } else response.sendRedirect(request.getContextPath() + "/login");
+
+       /*
+       String gettxt1 = request.getParameter("param");
+        String getjpg1 = request.getParameter("param");
+       String getjpg = request.getParameter("jpg");
+        String gettxt = request.getParameter("txt");
         if (gettxt != null || getjpg != null) {
             if (gettxt == null && getjpg != null) {
                 if (servletPath.equals("/DownloadServlet") && loginedUser == null) {
@@ -48,7 +62,7 @@ public class DownloadServlet extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.write("<p> Выберете файл для скачивания</p>");
             out.close();
-        }
+        }*/
 
 
 
