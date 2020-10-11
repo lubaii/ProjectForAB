@@ -2,11 +2,6 @@ package units;
 
 import bean.UserAccount;
 import config.SecurityConfig;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +10,8 @@ import java.util.Map;
 public class DataDAO {
 
     private static final Map<String, UserAccount> mapUsers = new HashMap<String, UserAccount>();
-    private static final String tempPass = "202cb962ac59075b964b07152d234b70";
+    private static final String tempPassAdmin = "202cb962ac59075b964b07152d234b70";
+    private static final String tempPassUser = "250cf8b51c773f3f8dc8b4be867a9a02";
 
     static {
         try {
@@ -28,11 +24,11 @@ public class DataDAO {
     private static void initUsers() throws NoSuchAlgorithmException {
 
         // This user has a role as USER.
-        UserAccount emp = new UserAccount("user1",tempPass,  //
+        UserAccount emp = new UserAccount("user1",tempPassUser,  //
                 SecurityConfig.ROLE_USER);
 
         // This user has 2 roles USER and AD.
-        UserAccount mng = new UserAccount("admin1", tempPass,  //
+        UserAccount mng = new UserAccount("admin1", tempPassAdmin,  //
                 SecurityConfig.ROLE_USER, SecurityConfig.ROLE_ADMIN);
 
         mapUsers.put(emp.getUserName(), emp);
@@ -40,17 +36,11 @@ public class DataDAO {
     }
 
     // Find a User by userName and password.
-    public static UserAccount findUser(String userName, String password) {
+    public static UserAccount findUser(String userName, String pass) {
         UserAccount u = mapUsers.get(userName);
-        //String hashPassword = password(tempPass);
-        if (u != null && u.getPassword().equals(tempPass)) {
+        if (u != null && u.getPassword().equals(tempPassAdmin)||u != null && u.getPassword().equals(tempPassUser)) {
             return u;
         }
         return null;
     }
-   /* public static String password(String tempPass) {
-        String md5Hex = DigestUtils.md5Hex(tempPass);
-        return md5Hex;
-    }*/
-
 }

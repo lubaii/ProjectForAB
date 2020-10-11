@@ -4,7 +4,6 @@ import bean.UserAccount;
 import org.apache.commons.codec.digest.DigestUtils;
 import units.AppUtils;
 import units.DataDAO;
-import units.PasswordHash;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
         super();
     }
-   // PasswordHash passwordHash;
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

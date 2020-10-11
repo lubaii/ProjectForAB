@@ -37,7 +37,7 @@
 
 <p style="color:blue;">Данные для входа:</p>
 
-admin1/123 <br>
+admin1/456 <br>
 user1/123
 
 
