@@ -13,10 +13,7 @@ import java.io.*;
 @WebServlet("/download")
 public class DownloadServlet extends HttpServlet {
     UserAccount loginedUser = null;
-    private final String DOWNLOAD_TXT_ = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\test.txt";
-    private final String DOWNLOAD_JPG_ = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\test2.jpg";
     private final String DOWNLOAD_DIR = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\";
-
 
     public DownloadServlet() {
 

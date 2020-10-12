@@ -16,7 +16,7 @@
  <b>Вы можете скачать файлы с другими расширениями</b>
 
 <br/>
-Скачать фотографию: <a href="download?param=test.jpg">test.jpg</a>
+Скачать фотографию: <a href="download?param=test2.jpg">test2.jpg</a>
 </p>
 Скачать файл: <a href="download?param=test.txt">test.txt</a>
 
