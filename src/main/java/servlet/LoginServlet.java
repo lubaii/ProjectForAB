@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 
 @WebServlet("/login")
@@ -40,10 +41,13 @@ public class LoginServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
 
-        //String hashPassword =passwordHash.password(password);
-        String hashPassword = password(password);
-        UserAccount userAccount = DataDAO.findUser(userName, hashPassword);
-       // UserAccount userAccount = DataDAO.findUser(userName, password);
+        UserAccount userAccount = null;
+        try {
+            userAccount = DataDAO.findUser(userName, password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
 
         if (userAccount == null) {
             String errorMessage = "Неправильный логин или пароль";
@@ -75,9 +79,6 @@ public class LoginServlet extends HttpServlet {
         }
 
     }
-    public  String password(String tempPass) {
-        String md5Hex = DigestUtils.md5Hex(tempPass);
-        return md5Hex;
-    }
+
 
 }

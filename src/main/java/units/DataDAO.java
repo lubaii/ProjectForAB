@@ -2,6 +2,10 @@ package units;
 
 import bean.UserAccount;
 import config.SecurityConfig;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +14,8 @@ import java.util.Map;
 public class DataDAO {
 
     private static final Map<String, UserAccount> mapUsers = new HashMap<String, UserAccount>();
-    private static final String tempPassAdmin = "202cb962ac59075b964b07152d234b70";
-    private static final String tempPassUser = "250cf8b51c773f3f8dc8b4be867a9a02";
+    private static final String tempPassAdmin = "202cb962ac59075b964b07152d234b70"; //Хеш параля получен так DigestUtils.md5Hex("456");
+    private static final String tempPassUser = "250cf8b51c773f3f8dc8b4be867a9a02";// Хеш пароля получен так DigestUtils.md5Hex("123");
 
     static {
         try {
@@ -36,11 +40,18 @@ public class DataDAO {
     }
 
     // Find a User by userName and password.
-    public static UserAccount findUser(String userName, String pass) {
+    public static UserAccount findUser(String userName, String pass) throws NoSuchAlgorithmException {
         UserAccount u = mapUsers.get(userName);
-        if (u != null && u.getPassword().equals(tempPassAdmin)||u != null && u.getPassword().equals(tempPassUser)) {
+        String tempPas = password(pass);
+        if (u != null && tempPas.equals(tempPassAdmin)||u != null && tempPas.equals(tempPassUser)) {
             return u;
         }
         return null;
+    }
+
+    public static String password(String temp) {
+
+        String md5Hex = DigestUtils.md5Hex(temp);
+        return md5Hex;
     }
 }

@@ -13,26 +13,28 @@ import java.io.*;
 @WebServlet("/download")
 public class DownloadServlet extends HttpServlet {
     UserAccount loginedUser = null;
-    private final String DOWNLOAD_DIR = "C:\\Users\\User\\Progects\\ProjectForAB\\web\\WEB-INF\\files\\";
 
     public DownloadServlet() {
 
     }
 
+
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        File relationFail = new File(this.getServletContext().getRealPath("/WEB-INF/files/"));
         loginedUser = AppUtils.getLoginedUser(request.getSession());
         String servletPath = request.getServletPath();
         String fileName = request.getParameter("param");
-        String filePath = DOWNLOAD_DIR + fileName;
+        String filePath = relationFail + File.separator + fileName; //
         if(!fileName.endsWith(".txt")){
             if (servletPath.equals("/download") && loginedUser == null) {
                 response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
         }
+
         File downloadFile = new File(filePath);
         FileInputStream inStream = new FileInputStream(downloadFile);
         response.setContentLength((int) downloadFile.length());
@@ -52,6 +54,7 @@ public class DownloadServlet extends HttpServlet {
 
         inStream.close();
         outStream.close();
+
     }
 
 
